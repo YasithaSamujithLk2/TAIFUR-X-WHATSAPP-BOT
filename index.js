@@ -19,9 +19,7 @@ const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, 
 const { sms,downloadMediaMessage } = require('./lib/msg')
 const { search , download } = require('aptoide-scraper')
 const axios = require('axios')
-const { mods } = require('fouadwa-scraper')
 const fg = require('api-dylux')
-const getFBInfo = require("fb-downloader-new");
 const Heroku = require('heroku-client')
 const FileType = require("file-type")
 const { cmd, commands } = require('./command')
@@ -39,7 +37,7 @@ const heroku = new Heroku({
 
 console.log("✔️ SQL Database Connected")
 
-// ===========SESSION===========
+/* ===========SESSION===========
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
 const sessdata = config.SESSION_ID.split("cyber-x@;;;")[1]
@@ -49,6 +47,7 @@ if(err) throw err
 fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
 console.log("🔒 Session Successfully Loaded !!")
 })})}
+*/
 // <<==========PORTS===========>>
 const express = require("express");
 const app = express();
@@ -82,7 +81,7 @@ if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
 connectToWA()
 }
 } else if (connection === 'open') {
-console.log('✅ Plugin installed and Connected...')
+console.log('✅ Installing Stable latest Version.... ')
 const path = require('path');
 fs.readdirSync("./plugins/").forEach((plugin) => {
 if (path.extname(plugin).toLowerCase() == ".js") {
@@ -133,17 +132,9 @@ const reply = (teks) => {
 }
 
 //----------------------------------------------------------------------------------------------
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
 
-const Mode =  await db_pool.get('MODERATORS')
-if ( Mode.length < 3 ) {
-await db_pool.insert( "MODERATORS" , config.MODERATORS )
-console.log('ℹ️ Default-DB Saved Successfully')
-}
 //============================================================================
-const onada =  await db_pool.get('MODERATORS')
+const onada = config.MODERATORS.split(",")
 const isCreator = [ botNumber2 , ...onada ]
       .map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net")
       .includes(sender)
@@ -159,15 +150,16 @@ const isBanUser = [ ...banbn ]
       .includes(sender)
 
  
-let epaneda =  "94778962038,94711421243,94775512050,94715166712,94787820101,94715346004,94784596431,94729932436,94785893102,94762862143,94743386944,94788749741,94755514590,94774605140"
+let epaneda =  "94778962038,94711421243,94775512050,94715166712,94787820101,94715346004,94784596431,94729932436,94785893102,94762862143,94743386944"
 const epada = epaneda.split(",")
 const isDev = [ ...epada ]
       .map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net")
       .includes(sender)
 //============================================================================ 
-    if( !isDev && from == '120363030304247368@g.us' ) return
-    if( !isDev && from == '120363174739054837@g.us' ) return
-    if( !isDev && from == '120363043873308146@g.us' ) return
+    if( from == '120363030304247368@g.us' ) return
+    if( from == '120363030304247368@g.us' ) return
+    if( from == '120363174739054837@g.us' ) return
+
     
   if( sender == '94711421243@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🥷`, key: mek.key }})
@@ -211,17 +203,9 @@ await conn.sendMessage(from, { react: { text: `🔮`, key: mek.key }})
 if( sender == '94785893102@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⚖`, key: mek.key }})
 }
+  
 
-if( sender == '94755514590@s.whatsapp.net' ) {
-await conn.sendMessage(from, { react: { text: `🕊️`, key: mek.key }})
-}
-
-if( sender == '94788749741@s.whatsapp.net' ) {
-await conn.sendMessage(from, { react: { text: `⛓`, key: mek.key }})
-}
-
-    
-    if ( config.WORK_TYPE == "only_group" ) {
+      if ( config.WORK_TYPE == "only_group" ) {
 if ( !isGroup && isCmd && !isDev && !isCreator && !isPersUser ) return 
       }
       
@@ -350,7 +334,7 @@ if ( m.quoted.id.startsWith("CYBER2") ) {
 if ( from == '120363174739054837@g.us' ) return
  if ( config.WORK_TYPE == "private" && !isDev && !isCreator ) return
 if ( body.startsWith("1") && body.length < 2 ) {
-const rew = m.quoted.msg.caption
+const rew = m.quoted.msg
 if ( rew.includes('YTMP3') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -401,22 +385,9 @@ let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.delete(baseURI + '/dynos')
 
 }
-if ( rew.includes('TIKTOK DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.play }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
-}
-if ( rew.includes('FB DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await getFBInfo(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.sd }, caption: "SD Quality\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
-}
-
 }
 if ( body.startsWith("2") && body.length < 2 ) {
-const rew = m.quoted.msg.caption
+const rew = m.quoted.msg
 if ( rew.includes('YTMP3') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -475,22 +446,10 @@ const msgg =`
 await conn.sendMessage(from, { image: { url : app.icon } , caption: msgg }, { quoted: mek })
 
 }
-if ( rew.includes('TIKTOK DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.wmplay }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
-}
-if ( rew.includes('FB DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await getFBInfo(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.hd }, caption: "HD Quality\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
-}
 
 }
 if ( body.startsWith("3") && body.length < 2 ) {
-const rew = m.quoted.msg.caption
+const rew = m.quoted.msg
 if ( rew.includes('YTMP4') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -520,16 +479,9 @@ await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 
 
 }
-if ( rew.includes('TIKTOK DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { audio: { url : ttdl.music }   , mimetype: 'audio/mpeg', fileName:  `${ttdl.nickname}.mp3` }, { quoted: mek })
-}
-
 }
 if ( body.startsWith("4") && body.length < 2 ) {
-const rew = m.quoted.msg.caption
+const rew = m.quoted.msg
 if ( rew.includes('YTMP4') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -619,27 +571,7 @@ const resmsg =`*Moderator List Reseted* ✅
 🔄  *_Please wait....  Restarting the bot...._*`
 reply(resmsg)
 }
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-if ( !data.includes(' & ') ) return reply('*Invalid Alive message format*')
-const getimage = data.split(" & ")[0]
-const getmsg = data.split(" & ")[1]
-await db_pool.insert( "ALIVE_MESSAGE" , getmsg )
-await db_pool.insert( "ALIVE_IMAGE" , getimage )
-const resmsg =`*Alive message and image Successfully Updated* ✅`
-reply(resmsg)
-}
-if ( rew.includes('Cyber-X Fouad-WA') ) {
-const getmod = await mods()
-let moddata = getmod.com_whatsapp
-await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
 
-}
 }
 
 if ( body.startsWith("1.2") && body.length < 4 ) {
@@ -699,23 +631,6 @@ const resmsg =`*Inbox User List Reseted* ✅
 
 🔄  *_Please wait....  Restarting the bot...._*`
 reply(resmsg)
-}
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-await db_pool.insert( "OWNER_NUMBER" , data )
-const resmsg =`*Owner Number Successfully Updated* ✅`
-reply(resmsg)
-}
-if ( rew.includes('Cyber-X Fouad-WA') ) {
-const getmod = await mods()
-let moddata = getmod.com_fmwhatsapp
-await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
-
 }
 
 }
@@ -779,23 +694,6 @@ const resmsg =`*Banned Users List Reseted* ✅
 🔄  *_Please wait....  Restarting the bot...._*`
 reply(resmsg)
 }
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-await db_pool.insert( "OWNER_NAME" , data )
-const resmsg =`*Owner Name Successfully Updated* ✅`
-reply(resmsg)
-}
-if ( rew.includes('Cyber-X Fouad-WA') ) {
-const getmod = await mods()
-let moddata = getmod.com_gbwhatsapp
-await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
-
-}
 
 }
 if ( body.startsWith("1.4") && body.length < 4 ) {
@@ -827,25 +725,6 @@ S. System information
 await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/cace8541cd66c731250a9.jpg" }, caption: menumg } , { quoted: mek })
 
 }
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-if ( !data.includes('sk-')) return reply('❌ *Invalid Openai Key*')
-await db_pool.insert( "OPENAI_KEY" , data )
-const resmsg =`*OpenAi Key Successfully Updated* ✅`
-reply(resmsg)
-}
-if ( rew.includes('Cyber-X Fouad-WA') ) {
-const getmod = await mods()
-let moddata = getmod.com_yowhatsapp
-await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
-
-}
-
 }
 if ( body.startsWith("1.5") && body.length < 4 ) {
 const rew = m.quoted.msg
@@ -875,17 +754,6 @@ S. System information
 *ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
 await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/cace8541cd66c731250a9.jpg" }, caption: menumg } , { quoted: mek })
 
-}
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-await db_pool.insert( "MENU_TEXT" , data )
-const resmsg =`*Menu message Successfully Updated* ✅`
-reply(resmsg)
 }
 }
 
@@ -929,17 +797,6 @@ await db_pool.insert( "ALIVE_IMAGE" , data.image )
 const resmsg =`*Alive message and image Successfully Reseted* ✅`
 reply(resmsg)
 }
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-await db_pool.insert( "S_PACK_NAME" , data )
-const resmsg =`*Stickerpack Name Successfully Updated* ✅`
-reply(resmsg)
-}
 
 }
 
@@ -963,41 +820,33 @@ ${menuc}
 await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/cace8541cd66c731250a9.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
-if ( rew.includes('Details Update Tool') ) {
-if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
-const getuse = rew.split("ɪᴅ - ")[1]
-const db_pool = new DBM({
-    db: config.DATABASE_URL
-})
-const data = await db_pool.get(getuse+"DB")
-await db_pool.insert( "S_OWNER_NAME" , data )
-const resmsg =`*Sticker owner name Successfully Updated* ✅`
-reply(resmsg)
+}
+if ( body.startsWith("2.1") && body.length < 4 ) {
+const rew = m.quoted.msg.caption
+if ( rew.includes('TIKTOK DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await fg.tiktok(fulllink)
+await conn.sendMessage(from, { video: {url: ttdl.play }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+}
 }
 
+if ( body.startsWith("2.2") && body.length < 4 ) {
+const rew = m.quoted.msg.caption
+if ( rew.includes('TIKTOK DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await fg.tiktok(fulllink)
+await conn.sendMessage(from, { video: {url: ttdl.wmplay }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
 }
-if ( body.startsWith("1.8") && body.length < 4 ) {
-const rew = m.quoted.msg
-if ( rew.includes('COMMANDS') ) {
-let menuc = ``
-for (let i=0;i<commands.length;i++) { 
-if(commands[i].category === 'edit'){
-  if(!commands[i].dontAddCommandList){
-menuc += `📪 *Pattern - ${commands[i].pattern}*
-🚙 _Description - ${commands[i].desc}_
-✔️ Usage - ${commands[i].use}
-
-`
-}}};
-
-let menumg = `🔐 *PHOTO EDIT COMMAND LIST-CYBER-X 2.0*
-
-${menuc}
-
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/cace8541cd66c731250a9.jpg" }, caption: menumg }, { quoted: mek } )
-
+}
+if ( body.startsWith("2.3") && body.length < 4 ) {
+const rew = m.quoted.msg.caption
+if ( rew.includes('TIKTOK DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await fg.tiktok(fulllink)
+await conn.sendMessage(from, { audio: { url : ttdl.music }   , mimetype: 'audio/mpeg', fileName:  `${ttdl.nickname}.mp3` }, { quoted: mek })
 }
 }
 }
@@ -1034,19 +883,8 @@ if ( config.ANTI_BOT == "true" && isBotAdmins ) {
 await conn.sendMessage(from, { delete: mek.key })
 await conn.groupParticipantsUpdate(from,[sender], 'remove')
   }}
-    if ( mek.id.startsWith("QUEENELISA") ) {
-await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` *🤖 Queen Elisa* ❗" })
-if ( config.ANTI_BOT == "true" && isBotAdmins ) {
-await conn.sendMessage(from, { delete: mek.key })
-await conn.groupParticipantsUpdate(from,[sender], 'remove')
-  }}
-    if ( mek.id.startsWith("RGNK") ) {
-await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` *🚫 Raganork Wa Bot* ❗" })
-if ( config.ANTI_BOT == "true" && isBotAdmins ) {
-await conn.sendMessage(from, { delete: mek.key })
-await conn.groupParticipantsUpdate(from,[sender], 'remove')
-  }}
-      
+
+  
   }
   }
 
