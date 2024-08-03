@@ -4,53 +4,25 @@ const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, 
 const { DBM } = require('postgres_dbm')
 
 cmd({
-    pattern: "mysettings",
-    react: "⚙️",
-    alias: ["allset"],
-    desc: "To Get the Aot All Settings List",
+    pattern: "get",
+    react: "🥏",
+    alias: ["check"],
+    desc: "Get Added Variables",
     category: "main",
-    use: '.allsettings',
+    use: '.get ALIVE_MESSAGE',
     filename: __filename
 },
-async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isCreator ,isDev, isAdmins, reply}) => {
+async(conn, mek, m,{from, l, quoted, body, isCmd, command, mentionByTag, db_pool, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isCreator ,isDev, isAdmins, reply}) => {
 try{
-if (!isCreator) { if (!isDev) return reply('🚫 *You must be a Moderator frist*') }
-const db_pool = new DBM({
+		if(!isCreator) { if ( !isDev) return conn.sendMessage(from,{text:"🚫 *This is Moderator only command*"},{quoted:mek }) }
+		const db_pool = new DBM({
     db: config.DATABASE_URL
 })
-const eka = await db_pool.get('ALIVE_MESSAGE')
-const deka = await db_pool.get('ALIVE_IMAGE')
-let thuna = await db_pool.get('OWNER_NAME')
-const hathara = await db_pool.get('OWNER_NUMBER')
-const paha = await db_pool.get('S_PACK_NAME')
-let haya = await db_pool.get('S_OWNER_NAME')
-
-
-let puka = `🛠️ *Hey This is Your All Setting List* ⚙️
-
-🛠️ *Bot Mode* - ${config.WORK_TYPE}
-🛠️ *Alive Message* - ${eka}
-🛠️ *Alive Image* -  ${deka}
-🛠️ *Owner Name* -  ${thuna}
-🛠️ *Owner Number* - ${hathara}
-🛠️ *Sticker Pack Name* - ${paha}
-🛠️ *Sticker Owner Name* - ${haya}
-🛠️ *Antilink Mode* - ${config.ANTI_LINK}
-🛠️ *Anti Bad Mode* -${config.ANTI_BAD}
-🛠️ *Bot Detect Mode* - ${config.BOT_DETECT}
-🛠️ *Anti Bot Mode* - ${config.ANTI_BOT}
-🛠️ *Auto Read Mode* - ${config.AUTO_MSG_READ}
-🛠️ *Auto React Mode* - ${config.AUTO_REACT}
-🛠️ *Moderator Numbers* - ${config.MODERATORS}
-🛠️ *Inbox User* - ${config.INBOX_USER}
-🛠️ *Banned User* - ${config.BANNED_USER}
-
-*ᴛᴀɪꜰᴜʀ-x  ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
- await conn.sendMessage(from , { text: puka }, { quoted: mek } )
-
+		const data = await db_pool.get(q)
+			await conn.sendMessage(from,{text: data },{quoted:mek })
+	
 } catch (e) {
-reply('🚫 *Error Accurated !!*\n\n' + e )
+reply('❗ *No added Data in Database*')
 l(e)
 }
 })
@@ -59,37 +31,25 @@ cmd({
     pattern: "setup",
     react: "⚙",
     alias: ["set"],
-    desc: "TAIFUR-X  Database Tools",
+    desc: "TAIFUR-X Database Tools",
     category: "main",
-    use: '.setup',
+    use: '.setup ALIVE_MESSAGE=Hi',
     filename: __filename
 },
 async(conn, mek, m,{from, l, quoted, body, isCmd, command, mentionByTag, db_pool, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isCreator ,isDev, isAdmins, reply}) => {
 try{
 if(!isCreator) { if ( !isDev) return conn.sendMessage(from,{text:"🚫 *This is Moderator only Command*"},{quoted:mek }) }
-if ( !m.quoted ) return reply('🧑‍💻  *Please quote a Text to Update the DB*')
+if ( !q ) return reply('🧑‍💻  *Please add Valid Database Var with Text*  ❗\n\n📌 Ex -: ```.setup ALIVE_MESSAGE=Hii How Are you Im Alive```\n\n⚠️ *Dont add space befor and after the "=" Symbol*')
+if (q.split('=')[0].endsWith(' ')) return reply('🚫 *Dont Add space After the "=" Symbol*')
+if (q.split('=')[1].startsWith(' ')) return  reply('🚫 *Dont add Space before the "=" Symbol*')
+const icon = q.split("=")[0] 
+const data = q.split("=")[1] 
+if ( !icon && !data ) reply('🚫 *Sorry ... Text in Error ! Please Add Valid Database Updating Message*')
 		const db_pool = new DBM({
     db: config.DATABASE_URL
 })
-		await db_pool.insert( `${senderNumber}DB` , m.quoted.msg )
-		const eka = `\n🧑‍🔧 *Taifur-X Details Update Tool* ⚙️
-
-_You can add quoted text as more title.Please check some quoted message's Templates_
-
-─────────────────────────────
-*ᴘʟᴇᴀꜱᴇ ʀᴇᴘʟʏ ᴀ ɴᴜᴍʙᴇʀ ꜰᴏʀ ʏᴏᴜ ɴᴇᴇᴅ*
-
-*│ 1.1 - Set as Alive message*
-*│ 1.2 - Set as Owner number*
-*│ 1.3 - Set as Owner name*
-*│ 1.4 - Set as Openai key*
-*│ 1.5 - Set as main menu Text*
-*│ 1.6 - Set as Stickers owner name*
-*│ 1.7 - Set as Stickers pack name*
-
-ᴛᴀɪꜰᴜʀ-x ᴄᴏɴꜰɪɢᴜʀᴀᴛɪᴏɴ ᴛᴏᴏʟ
-ᴜꜱᴇʀ ɪᴅ - ${senderNumber}`
-			await conn.sendMessage(from,{text: eka },{quoted:mek })
+		await db_pool.insert( icon , data )
+			await conn.sendMessage(from,{text: "*Database*  ```" + icon + "```  *Updated ✔️*"},{quoted:mek })
 	
 } catch (e) {
 reply('🚫 *Error Accurated !!*\n\n' + e )
@@ -97,3 +57,24 @@ l(e)
 }
 })
 
+
+cmd({
+    pattern: "setuplist",
+    react: "⚙",
+    alias: ["listsetup"],
+    desc: "TAIFUR-X Database Tools List",
+    category: "main",
+    use: '.setuplist',
+    filename: __filename
+},
+async(conn, mek, m,{from, l, quoted, body, isCmd, command, mentionByTag, db_pool, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isCreator ,isDev, isAdmins, reply}) => {
+try{
+const listeka ="🧑‍💻 *TAIFUR-X 2.0 DATABASE SETUP LIST*\n\n📍 ```ALIVE_IMAGE``` - Add direct link of Image \n\n📍 ```ALIVE_MESSAGE``` - Add your Alive message \n\n📍 ```OWNER_NUMBER``` - Add your Mobile Number \n\n📍 ```OWNER_NAME``` - Add your Name ( Bot Owner )\n\n📍 ```S_PACK_NAME``` - Add a pack name for Bot made Stickers\n\n📍 ```S_OWNER_NAME``` - Add a owner name for Bot made Stickers\n\n📍 ```OPENAI_KEY``` - Add Your OpenAI Key\n\n❗ *Instructions for Using Database Commands*\n\nEx -: ```.setup ALIVE_MESSAGE=Hii How Are you Im Alive```\n\n⚠️ *Dont Add space After the '=' Symbol*\n⚠️ *Dont Add space before the '=' Symbol*\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*"
+
+await conn.sendMessage(from,{text: listeka },{quoted:mek })
+
+} catch (e) {
+reply('🚫 *Error Accurated !!*\n\n' + e )
+l(e)
+}
+})
