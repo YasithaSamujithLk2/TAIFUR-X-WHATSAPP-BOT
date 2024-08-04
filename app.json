@@ -39,13 +39,13 @@
     },
     "buildpacks": [
         {
-            "url": "heroku/nodejs"
+            "url": "heroku-postgresql:essential-0"
         },
         {
             "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
         },
         {
-            "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+            "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest"
         }
     ],
     "formation": {
