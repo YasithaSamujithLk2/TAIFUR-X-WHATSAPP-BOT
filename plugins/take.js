@@ -17,7 +17,7 @@ async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sen
 try{
 if (!quoted) return reply('❗*Please mention a Sticker*')
 if (!q) return reply('❗ *Enter your Name and Pack Name to add the Sticker*')
-if(!q.includes('|')) return reply('🚫 *Invalid Request Request returned*\n\n💱 ```Eg -: .take Pack No 01 | Darkalphaxteam```')
+if(!q.includes('|')) return reply('🚫 *Invalid Request Request returned*\n\n💱 ```Eg -: .take Pack No 01 | 𝑇𝛥𝛪𝐹𝑈𝑅🥀```')
 const data = q.split("|")[0] 
 const datas = q.split("|")[1] 
 
