@@ -19,7 +19,9 @@ const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, 
 const { sms,downloadMediaMessage } = require('./lib/msg')
 const { search , download } = require('aptoide-scraper')
 const axios = require('axios')
+const { mods } = require('fouadwa-scraper')
 const fg = require('api-dylux')
+const getFBInfo = require("fb-downloader-new");
 const Heroku = require('heroku-client')
 const FileType = require("file-type")
 const { cmd, commands } = require('./command')
@@ -37,17 +39,16 @@ const heroku = new Heroku({
 
 console.log("✔️ SQL Database Connected")
 
-/* ===========SESSION===========
+// ===========SESSION===========
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const sessdata = config.SESSION_ID.split("taifur-x@;;;")[1]
+const sessdata = config.SESSION_ID.split("Taifur-X@;;;")[1]
 const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
 filer.download((err, data) => {
 if(err) throw err
 fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
 console.log("🔒 Session Successfully Loaded !!")
 })})}
-*/
 // <<==========PORTS===========>>
 const express = require("express");
 const app = express();
@@ -62,7 +63,7 @@ const conn = makeWASocket({
 version,
 logger: pino({ level: 'silent' }),
 printQRInTerminal: true,
-browser: ["TAIFUR-X 2.1", "safari", "3.3"],
+browser: ["Taifur-X 2.1", "safari", "3.3"],
 auth: state,
 getMessage: async (key) => {
             if (store) {
@@ -70,7 +71,7 @@ getMessage: async (key) => {
                 return msg.message || undefined
             }
             return {
-                conversation: "TAIFUR-X Web 2.1"
+                conversation: "Taifur-X Web 2.1"
             }
         }})
 
@@ -81,7 +82,7 @@ if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
 connectToWA()
 }
 } else if (connection === 'open') {
-console.log('✅ Installing Stable latest Version.... ')
+console.log('✅ Plugin installed and Connected...')
 const path = require('path');
 fs.readdirSync("./plugins/").forEach((plugin) => {
 if (path.extname(plugin).toLowerCase() == ".js") {
@@ -91,7 +92,7 @@ require("./plugins/" + plugin);
 console.log('📚 All Plugins installed')
 console.log('🐉 Taifur-X WhatsApp Bot connected ✅')
 //const botada = jidNormalizedUser(conn.user.id)   
-//conn.sendMessage(botada, { image: { url : "https://telegra.ph/file/bc812968537e8c21c63f3.jpg" } , caption: "*TAIFUR-X 2.0 Connected to WhatsApp* ✔️\n\n_This is the result of our team's hard work and our team owns the bot's rights and code rights. Therefore, you have no chance to change and submit our bot under any circumstances._\n\n🔰 *Official GitHub* - ```https://github.com/Itxtaifur ```\n\n🪀 *WhatsApp Community* - ```https://chat.whatsapp.com/JYWh2a462ZJHgdULBXmT5X```\n\n🧿 *Announcement Group* - ```https://chat.whatsapp.com/JYWh2a462ZJHgdULBXmT5X```\n\n*TAIFUR ᴏꜰꜰɪᴄɪᴀʟ*\n*ᴀʟʟ ʀɪɢʜᴛ ʀᴇꜱᴇʀᴠᴇᴅ - ᴛᴇᴀᴍ*"})
+//conn.sendMessage(botada, { image: { url : "https://i.imgur.com/5fjnt53.jpeg" } , caption: "*Taifur-X 2.0 Connected to WhatsApp* ✔️\n\n_This is the result of our team's hard work and our team owns the bot's rights and code rights. Therefore, you have no chance to change and submit our bot under any circumstances._\n\n🔰 *Official GitHub* - ```https://github.com/darkalphaxteam```\n\n🪀 *WhatsApp Community* - ```https://chat.whatsapp.com/CwFuybm14L697Viv4fvbE3```\n\n🧿 *Announcement Group* - ```https://chat.whatsapp.com/DZfpcfE1w0SAAWeikPKyFA```\n\n*ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰꜰɪᴄɪᴀʟ*\n*ᴀʟʟ ʀɪɢʜᴛ ʀᴇꜱᴇʀᴠᴇᴅ - ᴛᴇᴀᴍ*"})
 }
 })
 conn.ev.on('creds.update', saveCreds)
@@ -132,9 +133,17 @@ const reply = (teks) => {
 }
 
 //----------------------------------------------------------------------------------------------
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
 
+const Mode =  await db_pool.get('MODERATORS')
+if ( Mode.length < 3 ) {
+await db_pool.insert( "MODERATORS" , config.MODERATORS )
+console.log('ℹ️ Default-DB Saved Successfully')
+}
 //============================================================================
-const onada = config.MODERATORS.split(",")
+const onada =  await db_pool.get('MODERATORS')
 const isCreator = [ botNumber2 , ...onada ]
       .map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net")
       .includes(sender)
@@ -150,18 +159,17 @@ const isBanUser = [ ...banbn ]
       .includes(sender)
 
  
-let epaneda =  "4593707292,923056148789,94775512050,94715166712,94787820101,94715346004,94784596431,94729932436,94785893102,94762862143,94743386944"
+let epaneda =  "94778962038,94711421243,94775512050,94715166712,94787820101,94715346004,94784596431,94729932436,94785893102,94762862143,94743386944,94788749741,94755514590,94774605140"
 const epada = epaneda.split(",")
 const isDev = [ ...epada ]
       .map((v) => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net")
       .includes(sender)
 //============================================================================ 
-    if( from == '120363030304247368@g.us' ) return
-    if( from == '120363030304247368@g.us' ) return
-    if( from == '120363174739054837@g.us' ) return
-
+    if( !isDev && from == '120363030304247368@g.us' ) return
+    if( !isDev && from == '120363174739054837@g.us' ) return
+    if( !isDev && from == '120363043873308146@g.us' ) return
     
-  if( sender == '4593707292@s.whatsapp.net' ) {
+  if( sender == '94711421243@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `🥷`, key: mek.key }})
 }
     if( sender == '94778962038@s.whatsapp.net' ) {
@@ -203,9 +211,17 @@ await conn.sendMessage(from, { react: { text: `🔮`, key: mek.key }})
 if( sender == '94785893102@s.whatsapp.net' ) {
 await conn.sendMessage(from, { react: { text: `⚖`, key: mek.key }})
 }
-  
 
-      if ( config.WORK_TYPE == "only_group" ) {
+if( sender == '94755514590@s.whatsapp.net' ) {
+await conn.sendMessage(from, { react: { text: `🕊️`, key: mek.key }})
+}
+
+if( sender == '94788749741@s.whatsapp.net' ) {
+await conn.sendMessage(from, { react: { text: `⛓`, key: mek.key }})
+}
+
+    
+    if ( config.WORK_TYPE == "only_group" ) {
 if ( !isGroup && isCmd && !isDev && !isCreator && !isPersUser ) return 
       }
       
@@ -318,7 +334,7 @@ if (config.AI_MODE == "true"){
 if ( body.startsWith('/gpt')) {
 let bodyy = body.split('/gpt')[1]
 const aimsg = await fetchJson(`https://vihangayt.me/tools/chatgpt?q=${bodyy}`)
-reply("🧠 *TAIFUR-X AI Mode :- chatGPT*\n\n"+aimsg.data)
+reply("🧠 *Taifur-X AI Mode :- chatGPT*\n\n"+aimsg.data)
 }
 }
 //------------------------------ REPLYS WITHOUT COMMANDS --------------------------------
