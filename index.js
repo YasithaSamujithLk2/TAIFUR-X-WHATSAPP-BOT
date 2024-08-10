@@ -334,7 +334,7 @@ if ( m.quoted.id.startsWith("CYBER2") ) {
 if ( from == '120363174739054837@g.us' ) return
  if ( config.WORK_TYPE == "private" && !isDev && !isCreator ) return
 if ( body.startsWith("1") && body.length < 2 ) {
-const rew = m.quoted.msg
+const rew = m.quoted.msg.caption
 if ( rew.includes('YTMP3') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -362,9 +362,9 @@ if ( config.AUTO_REACT == 'true' ) {
 await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 }
 
-return await conn.sendMessage(from, { document : { url : await dj.video['240p'].download() }  ,caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
+return await conn.sendMessage(from, { document : { url : await dj.video['240p'].download() }  ,caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
 }
-await conn.sendMessage(from, { video: {url: await dj.video['240p'].download() }, caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+await conn.sendMessage(from, { video: {url: await dj.video['240p'].download() }, caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
     
     
 if ( config.AUTO_REACT == 'true' ) {
@@ -376,7 +376,7 @@ await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 if ( rew.includes('APK') ) {
 const getid = rew.split("ɪᴅ - ")[1]
 const app = await download(getid)
-await conn.sendMessage(from, { document : { url : app.dllink } , caption:"📦 *𝙰𝙿𝙺 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁* 📦\n\n📚 *App name : " + app.name + "*\n📂 *App Size : " + app.size + "*\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${app.name}.apk` }, { quoted: mek })
+await conn.sendMessage(from, { document : { url : app.dllink } , caption:"📦 *𝙰𝙿𝙺 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁* 📦\n\n📚 *App name : " + app.name + "*\n📂 *App Size : " + app.size + "*\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${app.name}.apk` }, { quoted: mek })
 
 }
 if ( rew.includes('List Updated') ) {
@@ -385,16 +385,29 @@ let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.delete(baseURI + '/dynos')
 
 }
+if ( rew.includes('TIKTOK DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await fg.tiktok(fulllink)
+await conn.sendMessage(from, { video: {url: ttdl.play }, caption: ttdl.nickname + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
+}
+if ( rew.includes('FB DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await getFBInfo(fulllink)
+await conn.sendMessage(from, { video: {url: ttdl.sd }, caption: "SD Quality\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
+}
+
 }
 if ( body.startsWith("2") && body.length < 2 ) {
-const rew = m.quoted.msg
+const rew = m.quoted.msg.caption
 if ( rew.includes('YTMP3') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
 const fulllink = 'https://youtube.com/watch?v=' + getlink
 const dj = await dl.youtubedl(fulllink)
 await conn.sendMessage(from, { react: { text: `⬆️`, key: mek.key }})
-await conn.sendMessage(from, { document : { url : await dj.audio['128kbps'].download() } , caption: dj.title+ "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'audio/mp3', fileName: `${dj.title}.mp3` }, { quoted: mek })
+await conn.sendMessage(from, { document : { url : await dj.audio['128kbps'].download() } , caption: dj.title+ "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'audio/mp3', fileName: `${dj.title}.mp3` }, { quoted: mek })
 await conn.sendMessage(from, { react: { text: `✔️`, key: mek.key }})
 
 }
@@ -415,9 +428,9 @@ if ( config.AUTO_REACT == 'true' ) {
 await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 }
 
-return await conn.sendMessage(from, { document : { url : await dj.video['360p'].download() }  ,caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
+return await conn.sendMessage(from, { document : { url : await dj.video['360p'].download() }  ,caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
 }
-await conn.sendMessage(from, { video: {url: await dj.video['360p'].download() }, caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+await conn.sendMessage(from, { video: {url: await dj.video['360p'].download() }, caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
     
     
 if ( config.AUTO_REACT == 'true' ) {
@@ -429,7 +442,7 @@ if ( rew.includes('APK') ) {
 const getid = rew.split("ɪᴅ - ")[1]
 const app = await download(getid)
 const msgg =`
-*CYBER-X APK INFORMATIONS*
+*Taifur-X APK INFORMATIONS*
 
 📚 *App name -: ${app.name}*
 
@@ -441,15 +454,27 @@ const msgg =`
 
 📱 Play Store Link -: https://play.google.com/store/apps/details?id=${app.package}
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
 await conn.sendMessage(from, { image: { url : app.icon } , caption: msgg }, { quoted: mek })
 
+}
+if ( rew.includes('TIKTOK DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await fg.tiktok(fulllink)
+await conn.sendMessage(from, { video: {url: ttdl.wmplay }, caption: ttdl.nickname + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
+}
+if ( rew.includes('FB DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await getFBInfo(fulllink)
+await conn.sendMessage(from, { video: {url: ttdl.hd }, caption: "HD Quality\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
 }
 
 }
 if ( body.startsWith("3") && body.length < 2 ) {
-const rew = m.quoted.msg
+const rew = m.quoted.msg.caption
 if ( rew.includes('YTMP4') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -467,9 +492,9 @@ if ( config.AUTO_REACT == 'true' ) {
 await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 }
 
-return await conn.sendMessage(from, { document : { url : await dj.video['720p'].download() }  ,caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
+return await conn.sendMessage(from, { document : { url : await dj.video['720p'].download() }  ,caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
 }
-await conn.sendMessage(from, { video: {url: await dj.video['720p'].download() }, caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+await conn.sendMessage(from, { video: {url: await dj.video['720p'].download() }, caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
     
     
 if ( config.AUTO_REACT == 'true' ) {
@@ -479,9 +504,16 @@ await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 
 
 }
+if ( rew.includes('TIKTOK DOWNLOADER') ) {
+const getlink = rew.split("Link -: ")[1]
+const fulllink = getlink.split("_*")[0]
+let ttdl = await fg.tiktok(fulllink)
+await conn.sendMessage(from, { audio: { url : ttdl.music }   , mimetype: 'audio/mpeg', fileName:  `${ttdl.nickname}.mp3` }, { quoted: mek })
+}
+
 }
 if ( body.startsWith("4") && body.length < 2 ) {
-const rew = m.quoted.msg
+const rew = m.quoted.msg.caption
 if ( rew.includes('YTMP4') ) {
 await conn.sendMessage(from, { react: { text: `⬇️`, key: mek.key }})
 const getlink = rew.split("ɪᴅ - ")[1]
@@ -499,9 +531,9 @@ if ( config.AUTO_REACT == 'true' ) {
 await conn.sendMessage(from, { react: { text: `☑️`, key: mek.key }})
 }
 
-return await conn.sendMessage(from, { document : { url : await dj.video['1080p'].download() }  ,caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
+return await conn.sendMessage(from, { document : { url : await dj.video['1080p'].download() }  ,caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'video/mp4', fileName: `${dj.title}.mp4` }, { quoted: mek })
 }
-await conn.sendMessage(from, { video: {url: await dj.video['1080p'].download() }, caption: dj.title + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
+await conn.sendMessage(from, { video: {url: await dj.video['1080p'].download() }, caption: dj.title + "\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" }, { quoted: mek })  
     
     
 if ( config.AUTO_REACT == 'true' ) {
@@ -527,7 +559,7 @@ menuc += `⏲️ *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *MAIN COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *MAIN COMMAND LIST-TAIFUR-X 2.0*
 
 ${menuc}
 
@@ -537,9 +569,9 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/de783e49d45aff62460eb.jpg" }, caption: menumg }, { quoted: mek } )
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 if ( rew.includes('Moderator Configuration') ) {
@@ -563,7 +595,7 @@ if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
 let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.patch(baseURI + '/config-vars', {
                     body: {
-                        ['MODERATORS']: "4593707292"
+                        ['MODERATORS']: "94778962038"
                     }
                 });
 const resmsg =`*Moderator List Reseted* ✅
@@ -571,7 +603,27 @@ const resmsg =`*Moderator List Reseted* ✅
 🔄  *_Please wait....  Restarting the bot...._*`
 reply(resmsg)
 }
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+if ( !data.includes(' & ') ) return reply('*Invalid Alive message format*')
+const getimage = data.split(" & ")[0]
+const getmsg = data.split(" & ")[1]
+await db_pool.insert( "ALIVE_MESSAGE" , getmsg )
+await db_pool.insert( "ALIVE_IMAGE" , getimage )
+const resmsg =`*Alive message and image Successfully Updated* ✅`
+reply(resmsg)
+}
+if ( rew.includes('Taifur-X Fouad-WA') ) {
+const getmod = await mods()
+let moddata = getmod.com_whatsapp
+await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
 
+}
 }
 
 if ( body.startsWith("1.2") && body.length < 4 ) {
@@ -588,7 +640,7 @@ menuc += `📥 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *DOWNLOAD COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *DOWNLOAD COMMAND LIST-Taifur-X 2.0*
 
 ${menuc}
 
@@ -598,9 +650,9 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/5f135d2a91a436a626f05.jpg" }, caption: menumg } , { quoted: mek } )
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg } , { quoted: mek } )
 
 }
 if ( rew.includes('Moderator Configuration') ) {
@@ -624,13 +676,30 @@ if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
 let baseURI = '/apps/' + config.HEROKU_APP_NAME
 await heroku.patch(baseURI + '/config-vars', {
                     body: {
-                        ['INBOX_USER']: "4593707292"
+                        ['INBOX_USER']: "94778962038"
                     }
                 });
 const resmsg =`*Inbox User List Reseted* ✅
 
 🔄  *_Please wait....  Restarting the bot...._*`
 reply(resmsg)
+}
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+await db_pool.insert( "OWNER_NUMBER" , data )
+const resmsg =`*Owner Number Successfully Updated* ✅`
+reply(resmsg)
+}
+if ( rew.includes('Taifur-X Fouad-WA') ) {
+const getmod = await mods()
+let moddata = getmod.com_fmwhatsapp
+await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
+
 }
 
 }
@@ -649,7 +718,7 @@ menuc += `🔎 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *SEARCH COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *SEARCH COMMAND LIST-Taifur-X 2.0*
 
 ${menuc}
 
@@ -659,9 +728,9 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/742690d2d8a26a560e5a1.jpg" }, caption: menumg }, { quoted: mek } )
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 if ( rew.includes('Moderator Configuration') ) {
@@ -694,6 +763,23 @@ const resmsg =`*Banned Users List Reseted* ✅
 🔄  *_Please wait....  Restarting the bot...._*`
 reply(resmsg)
 }
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+await db_pool.insert( "OWNER_NAME" , data )
+const resmsg =`*Owner Name Successfully Updated* ✅`
+reply(resmsg)
+}
+if ( rew.includes('Taifur-X Fouad-WA') ) {
+const getmod = await mods()
+let moddata = getmod.com_gbwhatsapp
+await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
+
+}
 
 }
 if ( body.startsWith("1.4") && body.length < 4 ) {
@@ -710,7 +796,7 @@ menuc += `🧑‍🔧 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *PROFILE COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *PROFILE COMMAND LIST-Taifur-X 2.0*
 
 ${menuc}
 
@@ -720,11 +806,30 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/7928c34989e127cc97806.jpg" }, caption: menumg } , { quoted: mek })
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg } , { quoted: mek })
 
 }
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+if ( !data.includes('sk-')) return reply('❌ *Invalid Openai Key*')
+await db_pool.insert( "OPENAI_KEY" , data )
+const resmsg =`*OpenAi Key Successfully Updated* ✅`
+reply(resmsg)
+}
+if ( rew.includes('Taifur-X Fouad-WA') ) {
+const getmod = await mods()
+let moddata = getmod.com_yowhatsapp
+await conn.sendMessage(from, { document : { url : moddata.link } , caption:"*Downloaded from https://fmmods.com/fouad-whatsapp/*\n\n*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*" ,mimetype: 'application/vnd.android.package-archive', fileName: `${moddata.name}.apk` }, { quoted: mek })
+
+}
+
 }
 if ( body.startsWith("1.5") && body.length < 4 ) {
 const rew = m.quoted.msg
@@ -740,7 +845,7 @@ menuc += `🪀 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *GROUP COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *GROUP COMMAND LIST-Taifur-X 2.0*
 
 ${menuc}
 
@@ -750,10 +855,21 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/7a6ae3f57a0b7899aab66.jpg" }, caption: menumg } , { quoted: mek })
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg } , { quoted: mek })
 
+}
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+await db_pool.insert( "MENU_TEXT" , data )
+const resmsg =`*Menu message Successfully Updated* ✅`
+reply(resmsg)
 }
 }
 
@@ -771,7 +887,7 @@ menuc += `📪 *Pattern - ${commands[i].pattern}*
 `
 }}};
 
-let menumg = `🔐 *EXTRA COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *EXTRA COMMAND LIST-Taifur-X 2.0*
 
 ${menuc}
 
@@ -781,9 +897,9 @@ ${menuc}
 R. Rate us
 S. System information 
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/5e9c8d4a76f621b13c414.jpg" }, caption: menumg }, { quoted: mek } )
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
 if ( rew.includes('Database Reset Function') ) {
@@ -791,10 +907,21 @@ if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
 const db_pool = new DBM({
     db: config.DATABASE_URL
 })
-const data = await fetchJson("https://raw.githubusercontent.com/Itxtaifur/UPLOADS/main/JSON/info.json")
+const data = await fetchJson("https://raw.githubusercontent.com/darkalphaxteam/UPLOADS/main/JSON/info.json")
 await db_pool.insert( "ALIVE_MESSAGE" , data.text )
 await db_pool.insert( "ALIVE_IMAGE" , data.image )
 const resmsg =`*Alive message and image Successfully Reseted* ✅`
+reply(resmsg)
+}
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+await db_pool.insert( "S_PACK_NAME" , data )
+const resmsg =`*Stickerpack Name Successfully Updated* ✅`
 reply(resmsg)
 }
 
@@ -811,42 +938,50 @@ menuc += `🌅 *Pattern - ${commands[i].pattern}* - _Enter your Text_
 `
 }}};
 
-let menumg = `🔐 *TEXT TO IMAGE COMMAND LIST-CYBER-X 2.0*
+let menumg = `🔐 *TEXT TO IMAGE COMMAND LIST-Taifur-X 2.0*
 
 ${menuc}
 
-*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*`
-await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/913493a6f4bbf23d4d07d.jpg" }, caption: menumg }, { quoted: mek } )
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg }, { quoted: mek } )
 
 }
-}
-if ( body.startsWith("2.1") && body.length < 4 ) {
-const rew = m.quoted.msg.caption
-if ( rew.includes('TIKTOK DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.play }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
-}
+if ( rew.includes('Details Update Tool') ) {
+if ( !isDev && !isCreator ) return reply('*You must be a Moderator Frists*')
+const getuse = rew.split("ɪᴅ - ")[1]
+const db_pool = new DBM({
+    db: config.DATABASE_URL
+})
+const data = await db_pool.get(getuse+"DB")
+await db_pool.insert( "S_OWNER_NAME" , data )
+const resmsg =`*Sticker owner name Successfully Updated* ✅`
+reply(resmsg)
 }
 
-if ( body.startsWith("2.2") && body.length < 4 ) {
-const rew = m.quoted.msg.caption
-if ( rew.includes('TIKTOK DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { video: {url: ttdl.wmplay }, caption: ttdl.nickname + "\n\n*ᴄʏʙᴇʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*\n*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴅᴀʀᴋᴀʟᴘʜᴀxᴛᴇᴀᴍ ᴏꜰᴄ*" }, { quoted: mek })  
 }
-}
-if ( body.startsWith("2.3") && body.length < 4 ) {
-const rew = m.quoted.msg.caption
-if ( rew.includes('TIKTOK DOWNLOADER') ) {
-const getlink = rew.split("Link -: ")[1]
-const fulllink = getlink.split("_*")[0]
-let ttdl = await fg.tiktok(fulllink)
-await conn.sendMessage(from, { audio: { url : ttdl.music }   , mimetype: 'audio/mpeg', fileName:  `${ttdl.nickname}.mp3` }, { quoted: mek })
+if ( body.startsWith("1.8") && body.length < 4 ) {
+const rew = m.quoted.msg
+if ( rew.includes('COMMANDS') ) {
+let menuc = ``
+for (let i=0;i<commands.length;i++) { 
+if(commands[i].category === 'edit'){
+  if(!commands[i].dontAddCommandList){
+menuc += `📪 *Pattern - ${commands[i].pattern}*
+🚙 _Description - ${commands[i].desc}_
+✔️ Usage - ${commands[i].use}
+
+`
+}}};
+
+let menumg = `🔐 *PHOTO EDIT COMMAND LIST-Taifur-X 2.0*
+
+${menuc}
+
+*ᴛᴀɪꜰᴜʀ-x ᴍᴜʟᴛɪ ᴅᴇᴠɪᴄᴇ ʙᴏᴛ : ᴠᴏʟ-ɪɪ*
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴀɪꜰᴜʀ X ʟᴜᴄɪꜰᴇʀ ᴏꜰᴄ*`
+await conn.sendMessage(from, { image: { url: "https://telegra.ph/file/aaa12d59c4a89492088b6.jpg" }, caption: menumg }, { quoted: mek } )
+
 }
 }
 }
@@ -883,8 +1018,19 @@ if ( config.ANTI_BOT == "true" && isBotAdmins ) {
 await conn.sendMessage(from, { delete: mek.key })
 await conn.groupParticipantsUpdate(from,[sender], 'remove')
   }}
-
-  
+    if ( mek.id.startsWith("QUEENELISA") ) {
+await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` *🤖 Queen Elisa* ❗" })
+if ( config.ANTI_BOT == "true" && isBotAdmins ) {
+await conn.sendMessage(from, { delete: mek.key })
+await conn.groupParticipantsUpdate(from,[sender], 'remove')
+  }}
+    if ( mek.id.startsWith("RGNK") ) {
+await conn.sendMessage(from, { text: "❌ ```Another Bot's message Detected :``` *🚫 Raganork Wa Bot* ❗" })
+if ( config.ANTI_BOT == "true" && isBotAdmins ) {
+await conn.sendMessage(from, { delete: mek.key })
+await conn.groupParticipantsUpdate(from,[sender], 'remove')
+  }}
+      
   }
   }
 
@@ -917,7 +1063,7 @@ console.log(isError)}
 })
 }
 app.get("/", (req, res) => {
-res.send("*Cyber-X WhatsApp Bot Working successfully..!*");
+res.send("*Taifur-X WhatsApp Bot Working successfully..!*");
 });
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
 setTimeout(() => {
