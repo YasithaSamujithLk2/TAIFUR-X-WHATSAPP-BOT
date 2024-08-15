@@ -20,6 +20,7 @@ const { sms,downloadMediaMessage } = require('./lib/msg')
 const { search , download } = require('aptoide-scraper')
 const axios = require('axios')
 const fg = require('api-dylux')
+const getFBInfo = require("fb-downloader-new");
 const Heroku = require('heroku-client')
 const FileType = require("file-type")
 const { cmd, commands } = require('./command')
