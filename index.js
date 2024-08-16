@@ -330,7 +330,7 @@ reply("📚 *Bot's Running prefix is* ```" + config.PREFIX + "```")
 
 if ( m.quoted ) {
 if (m.quoted.sender == botNumber2 ) {
-if ( m.quoted.id.startsWith("TAIFUR2") ) {
+if ( m.quoted.id.startsWith("CYBER2") ) {
 if ( from == '120363174739054837@g.us' ) return
  if ( config.WORK_TYPE == "private" && !isDev && !isCreator ) return
 if ( body.startsWith("1") && body.length < 2 ) {
