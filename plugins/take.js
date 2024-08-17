@@ -32,7 +32,7 @@ const sticker = new Sticker(media , {
     type: StickerTypes.FULL, // The sticker type
     categories: ['🤩', '🎉'], // The sticker category
     id: '12345', // The sticker id
-    quality: 100, // The quality of the output file
+    quality: 50, // The quality of the output file
     background: 'transparent' // The sticker background color (only for full stickers)
 })
 
